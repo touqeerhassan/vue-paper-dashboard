@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!--Stats cards-->
     <div class="row">
       <div class="col-md-6 col-xl-3" v-for="stats in statsCards" :key="stats.title">
@@ -13,7 +12,8 @@
             {{stats.value}}
           </div>
           <div class="stats" slot="footer">
-            <i :class="stats.footerIcon"></i> {{stats.footerText}}
+            <i :class="stats.footerIcon"></i>
+            {{stats.footerText}}
           </div>
         </stats-card>
       </div>
@@ -21,12 +21,13 @@
 
     <!--Charts-->
     <div class="row">
-
       <div class="col-12">
-        <chart-card title="Users behavior"
-                    sub-title="24 Hours performance"
-                    :chart-data="usersChart.data"
-                    :chart-options="usersChart.options">
+        <chart-card
+          title="Users behavior"
+          sub-title="24 Hours performance"
+          :chart-data="usersChart.data"
+          :chart-options="usersChart.options"
+        >
           <span slot="footer">
             <i class="ti-reload"></i> Updated 3 minutes ago
           </span>
@@ -39,12 +40,15 @@
       </div>
 
       <div class="col-md-6 col-12">
-        <chart-card title="Email Statistics"
-                    sub-title="Last campaign performance"
-                    :chart-data="preferencesChart.data"
-                    chart-type="Pie">
+        <chart-card
+          title="Email Statistics"
+          sub-title="Last campaign performance"
+          :chart-data="preferencesChart.data"
+          chart-type="Pie"
+        >
           <span slot="footer">
-            <i class="ti-timer"></i> Campaign set 2 days ago</span>
+            <i class="ti-timer"></i> Campaign set 2 days ago
+          </span>
           <div slot="legend">
             <i class="fa fa-circle text-info"></i> Open
             <i class="fa fa-circle text-danger"></i> Bounce
@@ -54,10 +58,12 @@
       </div>
 
       <div class="col-md-6 col-12">
-        <chart-card title="2015 Sales"
-                    sub-title="All products including Taxes"
-                    :chart-data="activityChart.data"
-                    :chart-options="activityChart.options">
+        <chart-card
+          title="2015 Sales"
+          sub-title="All products including Taxes"
+          :chart-data="activityChart.data"
+          :chart-options="activityChart.options"
+        >
           <span slot="footer">
             <i class="ti-check"></i> Data information certified
           </span>
@@ -67,14 +73,12 @@
           </div>
         </chart-card>
       </div>
-
     </div>
-
   </div>
 </template>
 <script>
 import { StatsCard, ChartCard } from "@/components/index";
-import Chartist from 'chartist';
+import Chartist from "chartist";
 export default {
   components: {
     StatsCard,
@@ -85,40 +89,7 @@ export default {
    */
   data() {
     return {
-      statsCards: [
-        {
-          type: "warning",
-          icon: "ti-server",
-          title: "Capacity",
-          value: "105GB",
-          footerText: "Updated now",
-          footerIcon: "ti-reload"
-        },
-        {
-          type: "success",
-          icon: "ti-wallet",
-          title: "Revenue",
-          value: "$1,345",
-          footerText: "Last day",
-          footerIcon: "ti-calendar"
-        },
-        {
-          type: "danger",
-          icon: "ti-pulse",
-          title: "Errors",
-          value: "23",
-          footerText: "In the last hour",
-          footerIcon: "ti-timer"
-        },
-        {
-          type: "info",
-          icon: "ti-twitter-alt",
-          title: "Followers",
-          value: "+45",
-          footerText: "Updated now",
-          footerIcon: "ti-reload"
-        }
-      ],
+      statsCards: null,
       usersChart: {
         data: {
           labels: [
@@ -189,6 +160,16 @@ export default {
         options: {}
       }
     };
+  },
+  mounted() {
+    this.$http
+      .get("http://localhost:8000/states")
+      .then(response => {
+        this.statsCards = response.data;
+      })
+      .catch(error => {
+        this.statsCards = [];
+      });
   }
 };
 </script>

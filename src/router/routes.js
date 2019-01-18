@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFoundPage.vue";
 
 // Admin pages
 import Dashboard from "@/pages/Dashboard.vue";
+import Login from "@/pages/Login.vue";
 import UserProfile from "@/pages/UserProfile.vue";
 import Notifications from "@/pages/Notifications.vue";
 import Icons from "@/pages/Icons.vue";
@@ -54,7 +55,8 @@ const routes = [
       }
     ]
   },
-  { path: "*", component: NotFound }
+  { path: "*", component: NotFound },
+  { path: "/login", name: "login", component: Login }
 ];
 
 /**
