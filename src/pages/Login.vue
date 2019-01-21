@@ -1,61 +1,69 @@
 <template>
-  <div class="full-height row">
+<div>
+  <div class="row">
     <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4 full-height">
-      <div class="container left-panel">
-        <section id="left">
+      <div class="left-panel">
+        <div id="left">
+          <div class="heading">
           <span id="lefthead">data</span>
           <span id="lefthead1">cue</span>
-          <br>
-          <br>
-          <br>
+        </div>
           <p id="message">
             <span>Automatically personalize your
-              <br>website & email to each visitor
+              <br>website & email to each visitor.
             </span>
           </p>
-        </section>
+        </div>
       </div>
     </div>
     <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8 full-height">
-      <section id="account-text">
-        <span>Don't have an account?</span>
+      <div id="account-text">
+        <span>Don't have an account? </span>
         <a href="#">
           <span id="noacc">
             <span>Sign up</span>
           </span>
         </a>
-      </section>
-      <section id="sec8-0">
-        <section id="sec8">
+      </div>
+      <div id="sec8-0">
+        <div id="sec8">
           <img src="../assets/img/plants-left.svg" class="image-left">
           <span id="sign-text">Sign in to DataCue</span>
           <hr align="left">
-        </section>
+        </div>
 
-        <section id="sec8-2">
+        <div id="sec8-2">
           <span>Email:</span>
           <br>
-          <input type="email" name="email" title="Email">
+          <input type="email" class="input" name="email" v-model="username" title="Email">
           <br>
           <span>Password:</span>
           <br>
-          <input type="password" name="password" title="Password">
-        </section>
-        <section id="sec8-3">
-          <input type="button" class="button" value="Login">
+          <input type="password" class="input" name="password" v-model="password" title="Password">
+        </div>
+        <div id="sec8-3">
+          <input type="button" class="button" v-on:click="login" value="Login">
           <img src="../assets/img/plants-right.svg" class="image-right">
-        </section>
-      </section>
+        </div>
+      </div>
     </div>
+  </div>
   </div>
 </template>
 <script>
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      username:"",
+      password:""
+    };
   },
-  mounted() {}
+  methods: {
+    login: function () {
+      console.log(this.username,this.password);
+    }
+  }
 };
 </script>
 <style>
@@ -71,25 +79,25 @@ export default {
 }
 #left {
   font-weight: 600;
-  margin-top: 45%;
-  margin-left: 12%;
+  padding-top: 45%;
   text-align: center;
 }
 #lefthead {
   font-weight: 300;
-  font-size: 3vw;
-  font-family: sans-serif;
 }
 #lefthead1 {
-  font-family: sans-serif;
   color: #f8b43a;
   font-weight: 300;
-  font-size: 3vw;
 }
 #message {
   font-family: sans-serif;
   font-weight: 300;
-  font-size: 1vw;
+  font-size: 15px;
+  padding-bottom: 75%;
+  padding-top: 15px;
+}
+.heading{
+  font-size: 50px;
 }
 input[type="email"] {
   width: 100%;
@@ -180,43 +188,33 @@ hr {
 }
 
 @media only screen and (max-width: 550px) {
-  /* For mobile phones: */
-  [id*="lefthead"] {
-    font-weight: 300;
-    font-size: 6vw;
-    font-family: sans-serif;
+  #message{
+    padding-bottom: 0px
   }
-}
-@media only screen and (max-width: 600px) {
-  body {
-    background-color: lightblue;
+
+  hr{
+    width: 90%
   }
-}
-@media only screen and (max-width: 550px) {
-  .container {
+
+  .image-right{
+    display: none;
+  }
+
+  .image-left{
+    display: none;
+  }
+
+  .left-panel {
     background-image: url("../assets/img/background-with-squares.svg");
   }
-}
 
-@media only screen and (max-width: 623px) {
-  .image-left {
-    display: none;
+  input{
+    width: 90% !important;
+    margin-bottom: 15px !important
   }
-}
-@media only screen and (max-width: 623px) {
-  .image-right {
-    display: none;
-  }
-}
-@media only screen and (max-width: 450px) {
-  .col-md-12 {
-    width: 100%;
-    height: 100%;
-  }
-  @media only screen and (max-width: 3418px) and (max-width: 2153px) #lefthead {
-    font-weight: 300;
-    font-size: 2vw;
-    font-family: sans-serif;
+
+  #sign-text{
+    font-size: 24px
   }
 }
 </style>
