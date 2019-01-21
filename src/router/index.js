@@ -13,9 +13,10 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // console.log(to, from)
   store.dispatch("updateAuth", true);
-  console.log(store.getters.getAuth)
+  console.log(store.getters.getAuth);
+  // Todo : Route to correct Urls
   localStorage.setItem('authenticated', true);
-  console.log(localStorage.getItem('authenticated'))
+  console.log(localStorage.getItem('authenticated'));
 
   next();
 })
